@@ -15,7 +15,7 @@ cuda-foundations is an educational CUDA repository, but security issues still ma
 
 Please use GitHub private vulnerability reporting:
 
-- <https://github.com/open-infra-ai/cuda-foundations/security/advisories/new>
+- <https://github.com/holtwood-systems/cuda-foundations/security/advisories/new>
 
 Include:
 

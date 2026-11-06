@@ -1,7 +1,7 @@
 # FlashAttention 详解
 
 ::: warning 教学简化核，不是权威实现
-`03-hpc-advanced/src/05_attention/` 只讲 tiling 与 online softmax。完整前后向、WMMA、FlashDecoding 与实测数字见 [cuflash](https://github.com/open-infra-ai/cuflash)。Triton 参考实现见 [trifuse](https://github.com/open-infra-ai/trifuse)。
+`03-hpc-advanced/src/05_attention/` 只讲 tiling 与 online softmax。完整前后向、WMMA、FlashDecoding 与实测数字见 [cuflash](https://github.com/holtwood-systems/cuflash)。Triton 参考实现见 [trifuse](https://github.com/holtwood-systems/trifuse)。
 :::
 
 ::: warning 性能数字为教学占位

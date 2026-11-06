@@ -1,8 +1,8 @@
 # cuda-foundations
 
-> GitHub 仓库名：[`cuda-foundations`](https://github.com/open-infra-ai/cuda-foundations)
+> GitHub 仓库名：[`cuda-foundations`](https://github.com/holtwood-systems/cuda-foundations)
 >
-> 📚 作品集地图：<https://github.com/open-infra-ai/open-infra-ai>
+> 📚 作品集地图：<https://github.com/holtwood-systems/portfolio>
 
 <p align="center">
   <strong>从 SGEMM 基础到可复用推理组件的系统性 CUDA 算子工程学习路径</strong><br>
@@ -10,9 +10,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/open-infra-ai/cuda-foundations/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/open-infra-ai/cuda-foundations/ci.yml?style=flat-square&logo=github&label=CI" alt="CI"></a>
-  <a href="https://open-infra-ai.github.io/cuda-foundations/"><img src="https://img.shields.io/github/actions/workflow/status/open-infra-ai/cuda-foundations/pages.yml?branch=master&style=flat-square&logo=githubpages&logoColor=white&label=Pages" alt="Pages"></a>
-  <a href="https://github.com/open-infra-ai/cuda-foundations/releases"><img src="https://img.shields.io/github/v/release/open-infra-ai/cuda-foundations?style=flat-square&logo=github" alt="Release"></a>
+  <a href="https://github.com/holtwood-systems/cuda-foundations/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/holtwood-systems/cuda-foundations/ci.yml?style=flat-square&logo=github&label=CI" alt="CI"></a>
+  <a href="https://holtwood-systems.github.io/cuda-foundations/"><img src="https://img.shields.io/github/actions/workflow/status/holtwood-systems/cuda-foundations/pages.yml?branch=master&style=flat-square&logo=githubpages&logoColor=white&label=Pages" alt="Pages"></a>
+  <a href="https://github.com/holtwood-systems/cuda-foundations/releases"><img src="https://img.shields.io/github/v/release/holtwood-systems/cuda-foundations?style=flat-square&logo=github" alt="Release"></a>
   <img src="https://img.shields.io/badge/CUDA-12.x-76B900?style=flat-square&logo=nvidia" alt="CUDA">
   <img src="https://img.shields.io/badge/C++-17%2F20-00599C?style=flat-square&logo=cplusplus" alt="C++">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>
@@ -25,7 +25,7 @@
 <div class="showcase-hero">
   <p class="showcase-kicker">这个仓库面向希望真正理解 CUDA 算子工程路径的读者：从第一个可运行 SGEMM，到可复用 kernel、进阶优化实验，以及轻量级推理系统拼装。</p>
   <div class="showcase-cta">
-    <a href="https://open-infra-ai.github.io/cuda-foundations/">访问 GitHub Pages</a>
+    <a href="https://holtwood-systems.github.io/cuda-foundations/">访问 GitHub Pages</a>
     <a href="docs/zh/index.md">查看文档</a>
     <a href="01-sgemm-tutorial/README.md">从模块 01 开始</a>
   </div>
@@ -48,13 +48,13 @@
 
 ## 仓库状态
 
-教学仓库，状态 **stable**（只做正确性修复与教学打磨，不再新增模块）。四个模块已完成。2026-08-23 在 RTX 3060 Laptop（sm_86、CUDA 12.0）上运行 `ctest --preset default`，结果为 **261/261 通过**。后续精力投入 [LEARNING_PATH.md](https://github.com/open-infra-ai/open-infra-ai/blob/master/LEARNING_PATH.md) 中记录的后续项目（如 `tiny-llm` 与 `paged-serving`）。
+教学仓库，状态 **stable**（只做正确性修复与教学打磨，不再新增模块）。四个模块已完成。2026-08-23 在 RTX 3060 Laptop（sm_86、CUDA 12.0）上运行 `ctest --preset default`，结果为 **261/261 通过**。后续精力投入 [LEARNING_PATH.md](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md) 中记录的后续项目（如 `tiny-llm` 与 `paged-serving`）。
 
 ## 仓库收敛边界
 
 cuda-foundations 是 `sgemm-optimization`、`modern-ai-kernels`、`hpc-ai-optimization-lab` 和 `mini-inference-engine` 四条重叠学习路径的唯一维护入口。仍有价值的实现和验证已经进入对应模块，重复仓库直接退场，不再保留平行维护入口。
 
-原 `llm-speed` 的 GEMM 学习路径由本仓库覆盖，仍维护的深度 FlashAttention 实现位于 [`cuflash`](https://github.com/open-infra-ai/cuflash)。本仓库不会搬入每一种历史实现，只为每个教学角色保留一条清晰路径。
+原 `llm-speed` 的 GEMM 学习路径由本仓库覆盖，仍维护的深度 FlashAttention 实现位于 [`cuflash`](https://github.com/holtwood-systems/cuflash)。本仓库不会搬入每一种历史实现，只为每个教学角色保留一条清晰路径。
 
 ## 项目边界（IN / OUT）
 
@@ -67,9 +67,9 @@ cuda-foundations 是 `sgemm-optimization`、`modern-ai-kernels`、`hpc-ai-optimi
 
 **OUT（明确不做，见对应仓库）**：
 
-- 生产级推理运行时（模型加载/采样/生成）→ [tiny-llm](https://github.com/open-infra-ai/tiny-llm)
-- 完整 FlashAttention 前后向与优化 → [cuflash](https://github.com/open-infra-ai/cuflash)
-- Serving / 分页 KV / continuous batching → [paged-serving](https://github.com/open-infra-ai/paged-serving)
+- 生产级推理运行时（模型加载/采样/生成）→ [tiny-llm](https://github.com/holtwood-systems/tiny-llm)
+- 完整 FlashAttention 前后向与优化 → [cuflash](https://github.com/holtwood-systems/cuflash)
+- Serving / 分页 KV / continuous batching → [paged-serving](https://github.com/holtwood-systems/paged-serving)
 - 本仓库 [04-inference-engine](04-inference-engine/README.md) 为**教学预览**，非独立作品
 - 本仓库 [03-hpc-advanced](03-hpc-advanced/README.md) 的 FlashAttention 核是教学简化版，权威实现见 cuflash
 
@@ -92,12 +92,12 @@ cuda-foundations 是 `sgemm-optimization`、`modern-ai-kernels`、`hpc-ai-optimi
 | 看 kernel 如何落到小系统里 | [04-inference-engine](04-inference-engine/README.md) |
 | 了解构建、验证、协作流程 | [docs/zh/index.md](docs/zh/index.md) |
 
-如果目标是从初学者逐步转向 AI Infra 岗位，请按 [AI Infra 初学者学习路径](https://github.com/open-infra-ai/open-infra-ai/blob/master/LEARNING_PATH.md) 串联 CUDA、Triton、FlashAttention、推理运行时和 Serving 五个主仓。该文档也统一保留性能优化与不变量测试的方法。
+如果目标是从初学者逐步转向 AI Infra 岗位，请按 [AI Infra 初学者学习路径](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md) 串联 CUDA、Triton、FlashAttention、推理运行时和 Serving 五个主仓。该文档也统一保留性能优化与不变量测试的方法。
 
 ## 快速开始
 
 ```bash
-git clone https://github.com/open-infra-ai/cuda-foundations.git
+git clone https://github.com/holtwood-systems/cuda-foundations.git
 cd cuda-foundations
 
 cmake --list-presets
@@ -156,7 +156,7 @@ make test
   title = {cuda-foundations},
   year = {2026},
   publisher = {GitHub},
-  url = {https://github.com/open-infra-ai/cuda-foundations}
+  url = {https://github.com/holtwood-systems/cuda-foundations}
 }
 ```
 

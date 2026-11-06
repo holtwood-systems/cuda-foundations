@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://open-infra-ai.github.io/cuda-foundations/sitemap.xml
+Sitemap: https://holtwood-systems.github.io/cuda-foundations/sitemap.xml

@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
-const repoUrl = 'https://github.com/open-infra-ai/cuda-foundations'
-const pagesUrl = 'https://open-infra-ai.github.io/cuda-foundations/'
+const repoUrl = 'https://github.com/holtwood-systems/cuda-foundations'
+const pagesUrl = 'https://holtwood-systems.github.io/cuda-foundations/'
 const docsEditPattern = `${repoUrl}/edit/master/docs/:path`
 
 export default withMermaid(defineConfig({

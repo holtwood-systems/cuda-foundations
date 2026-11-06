@@ -1,8 +1,8 @@
 # cuda-foundations
 
-> GitHub repository: [`cuda-foundations`](https://github.com/open-infra-ai/cuda-foundations)
+> GitHub repository: [`cuda-foundations`](https://github.com/holtwood-systems/cuda-foundations)
 >
-> 📚 Portfolio map: <https://github.com/open-infra-ai/open-infra-ai>
+> 📚 Portfolio map: <https://github.com/holtwood-systems/portfolio>
 
 <p align="center">
   <strong>Systematic CUDA kernel engineering from SGEMM fundamentals to reusable inference components</strong><br>
@@ -10,9 +10,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/open-infra-ai/cuda-foundations/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/open-infra-ai/cuda-foundations/ci.yml?style=flat-square&logo=github&label=CI" alt="CI"></a>
-  <a href="https://open-infra-ai.github.io/cuda-foundations/"><img src="https://img.shields.io/github/actions/workflow/status/open-infra-ai/cuda-foundations/pages.yml?branch=master&style=flat-square&logo=githubpages&logoColor=white&label=Pages" alt="Pages"></a>
-  <a href="https://github.com/open-infra-ai/cuda-foundations/releases"><img src="https://img.shields.io/github/v/release/open-infra-ai/cuda-foundations?style=flat-square&logo=github" alt="Release"></a>
+  <a href="https://github.com/holtwood-systems/cuda-foundations/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/holtwood-systems/cuda-foundations/ci.yml?style=flat-square&logo=github&label=CI" alt="CI"></a>
+  <a href="https://holtwood-systems.github.io/cuda-foundations/"><img src="https://img.shields.io/github/actions/workflow/status/holtwood-systems/cuda-foundations/pages.yml?branch=master&style=flat-square&logo=githubpages&logoColor=white&label=Pages" alt="Pages"></a>
+  <a href="https://github.com/holtwood-systems/cuda-foundations/releases"><img src="https://img.shields.io/github/v/release/holtwood-systems/cuda-foundations?style=flat-square&logo=github" alt="Release"></a>
   <img src="https://img.shields.io/badge/CUDA-12.x-76B900?style=flat-square&logo=nvidia" alt="CUDA">
   <img src="https://img.shields.io/badge/C++-17%2F20-00599C?style=flat-square&logo=cplusplus" alt="C++">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>
@@ -25,7 +25,7 @@
 <div class="showcase-hero">
   <p class="showcase-kicker">A repository for people who want to understand how CUDA kernels evolve from a first correct GEMM into reusable kernels, advanced optimization experiments, and lightweight inference plumbing.</p>
   <div class="showcase-cta">
-    <a href="https://open-infra-ai.github.io/cuda-foundations/">Visit GitHub Pages</a>
+    <a href="https://holtwood-systems.github.io/cuda-foundations/">Visit GitHub Pages</a>
     <a href="docs/en/index.md">Read the docs</a>
     <a href="01-sgemm-tutorial/README.md">Start with module 01</a>
   </div>
@@ -53,14 +53,14 @@ refinements only; no new modules). The four modules are complete. On the
 2026-08-23 test machine (RTX 3060 Laptop, sm_86, CUDA 12.0),
 `ctest --preset default` reported **261/261 passed**. No new modules
 will be added here. Follow-up
-work lives in [LEARNING_PATH.md](https://github.com/open-infra-ai/open-infra-ai/blob/master/LEARNING_PATH.md) (e.g. `tiny-llm`
+work lives in [LEARNING_PATH.md](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md) (e.g. `tiny-llm`
 and `paged-serving`).
 
 ## Consolidation boundary
 
 cuda-foundations is the maintained successor for the overlapping learning paths that previously lived in `sgemm-optimization`, `modern-ai-kernels`, `hpc-ai-optimization-lab`, and `mini-inference-engine`. Useful implementations and verification now live in the matching modules; the duplicate repositories have been retired instead of remaining as parallel maintenance surfaces.
 
-The former `llm-speed` GEMM learning path is covered here, while the maintained deep FlashAttention implementation lives in [`cuflash`](https://github.com/open-infra-ai/cuflash). The repository intentionally keeps only one implementation per teaching role instead of importing every historical variant.
+The former `llm-speed` GEMM learning path is covered here, while the maintained deep FlashAttention implementation lives in [`cuflash`](https://github.com/holtwood-systems/cuflash). The repository intentionally keeps only one implementation per teaching role instead of importing every historical variant.
 
 ## Scope（IN / OUT）
 
@@ -73,9 +73,9 @@ The former `llm-speed` GEMM learning path is covered here, while the maintained 
 
 **OUT（明确不做，见对应仓库）**：
 
-- 生产级推理运行时（模型加载/采样/生成）→ [tiny-llm](https://github.com/open-infra-ai/tiny-llm)
-- 完整 FlashAttention 前后向与优化 → [cuflash](https://github.com/open-infra-ai/cuflash)
-- Serving / 分页 KV / continuous batching → [paged-serving](https://github.com/open-infra-ai/paged-serving)
+- 生产级推理运行时（模型加载/采样/生成）→ [tiny-llm](https://github.com/holtwood-systems/tiny-llm)
+- 完整 FlashAttention 前后向与优化 → [cuflash](https://github.com/holtwood-systems/cuflash)
+- Serving / 分页 KV / continuous batching → [paged-serving](https://github.com/holtwood-systems/paged-serving)
 - 本仓库 [04-inference-engine](04-inference-engine/README.md) 为**教学预览**，非独立作品
 - 本仓库 [03-hpc-advanced](03-hpc-advanced/README.md) 的 FlashAttention 核是教学简化版，权威实现见 cuflash
 
@@ -98,12 +98,12 @@ The former `llm-speed` GEMM learning path is covered here, while the maintained 
 | see kernels embedded in a tiny system | [04-inference-engine](04-inference-engine/README.md) |
 | understand how to build, verify, and contribute | [docs/en/index.md](docs/en/index.md) |
 
-For the repository sequence from CUDA fundamentals to LLM serving, see the Chinese [AI Infra beginner learning path](https://github.com/open-infra-ai/open-infra-ai/blob/master/LEARNING_PATH.md). It also records the shared optimization and invariant-testing method used across the five retained projects.
+For the repository sequence from CUDA fundamentals to LLM serving, see the Chinese [AI Infra beginner learning path](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md). It also records the shared optimization and invariant-testing method used across the five retained projects.
 
 ## Quick start
 
 ```bash
-git clone https://github.com/open-infra-ai/cuda-foundations.git
+git clone https://github.com/holtwood-systems/cuda-foundations.git
 cd cuda-foundations
 
 cmake --list-presets
@@ -137,7 +137,7 @@ make test
 - [Changelog](CHANGELOG.md)
 - [中文文档首页](docs/zh/index.md)
 - [Contributing](CONTRIBUTING.md)
-- 📖 [技术文档站](https://open-infra-ai.github.io/cuda-foundations/) 由 VitePress 驱动，支持 NVIDIA 风格深色主题、交互式图表和学术论文引用。
+- 📖 [技术文档站](https://holtwood-systems.github.io/cuda-foundations/) 由 VitePress 驱动，支持 NVIDIA 风格深色主题、交互式图表和学术论文引用。
 
 ## Requirements
 
@@ -163,7 +163,7 @@ make test
   title = {cuda-foundations},
   year = {2026},
   publisher = {GitHub},
-  url = {https://github.com/open-infra-ai/cuda-foundations}
+  url = {https://github.com/holtwood-systems/cuda-foundations}
 }
 ```
 

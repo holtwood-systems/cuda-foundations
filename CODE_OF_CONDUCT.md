@@ -60,7 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement by contacting
-the maintainer via **[GitHub](https://github.com/holtwood)** or by opening a private report via [GitHub Security Advisories](https://github.com/open-infra-ai/cuda-foundations/security/advisories/new).
+the maintainer via **[GitHub](https://github.com/holtwood)** or by opening a private report via [GitHub Security Advisories](https://github.com/holtwood-systems/cuda-foundations/security/advisories/new).
 
 All complaints will be reviewed and investigated promptly and fairly.
 

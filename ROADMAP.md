@@ -1,14 +1,14 @@
 # cuda-foundations 路线图
 
-> 仓库名：[`cuda-foundations`](https://github.com/open-infra-ai/cuda-foundations)
+> 仓库名：[`cuda-foundations`](https://github.com/holtwood-systems/cuda-foundations)
 > 定位：GPU 学习主线（五主仓）的 **CUDA 系统教学仓**，`phase-2-e` 面试就绪冻结。
 > 可执行的分步开发计划见 [DEV_PLAN.md](DEV_PLAN.md)。
-> 旗舰开发投入在 [tiny-llm](https://github.com/open-infra-ai/tiny-llm)（运行时）与
-> [cuflash](https://github.com/open-infra-ai/cuflash)（kernel 深度）。
+> 旗舰开发投入在 [tiny-llm](https://github.com/holtwood-systems/tiny-llm)（运行时）与
+> [cuflash](https://github.com/holtwood-systems/cuflash)（kernel 深度）。
 >
 > 归档状态：DEV_PLAN.md 的 T1–T12 已全部落地。
 > 2026-08-23 在 RTX 3060 Laptop（sm_86、CUDA 12.0）执行
-> `ctest --preset default`：261/261 通过。组织 landing 页：<https://github.com/open-infra-ai/open-infra-ai>
+> `ctest --preset default`：261/261 通过。组织 landing 页：<https://github.com/holtwood-systems/portfolio>
 
 ## 面试前必做（数据可信度）
 
@@ -20,7 +20,7 @@
 
 ## 结构维护
 
-- [x] 保持 LEARNING_PATH.md 作为 GPU 学习主线（五主仓）导航的唯一权威入口（2026-08-21 起迁至 meta 仓 `open-infra-ai/open-infra-ai`），新增仓库或改名时同步更新
+- [x] 保持 LEARNING_PATH.md 作为 GPU 学习主线（五主仓）导航的唯一权威入口（2026-08-21 起迁至 meta 仓 `holtwood-systems/portfolio`），新增仓库或改名时同步更新
 - [x] 保持 04-inference-engine 与 tiny-llm 的边界说明 ~~(README/ROADMAP 已明确)~~：前者是"kernel/内存/流如何组装进小系统"的教学演示，
       后者是面向真实模型权重的运行时（避免面试官问"这两个什么关系"时答不清）
 - [x] 每个模块保持"一个教学角色只留一份实现"的既有收敛原则 ~~(本次归档已按此原则清理)~~

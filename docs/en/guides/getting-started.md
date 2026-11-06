@@ -19,7 +19,7 @@ This document covers installation and build instructions for cuda-foundations.
 ## Clone Repository
 
 ```bash
-git clone https://github.com/open-infra-ai/cuda-foundations.git
+git clone https://github.com/holtwood-systems/cuda-foundations.git
 cd cuda-foundations
 ```
 

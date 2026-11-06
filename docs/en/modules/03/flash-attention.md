@@ -5,7 +5,7 @@ outline: [2, 3]
 # FlashAttention
 
 ::: warning Teaching kernel, not the portfolio authority
-The `03-hpc-advanced` FlashAttention sources explain tiling and online softmax only. Forward+backward, WMMA, FlashDecoding, and measured numbers live in [cuflash](https://github.com/open-infra-ai/cuflash). The Triton reference is [trifuse](https://github.com/open-infra-ai/trifuse).
+The `03-hpc-advanced` FlashAttention sources explain tiling and online softmax only. Forward+backward, WMMA, FlashDecoding, and measured numbers live in [cuflash](https://github.com/holtwood-systems/cuflash). The Triton reference is [trifuse](https://github.com/holtwood-systems/trifuse).
 :::
 
 ::: warning Performance numbers are teaching placeholders
