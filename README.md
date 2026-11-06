@@ -56,6 +56,16 @@ will be added here. Follow-up
 work lives in [LEARNING_PATH.md](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md) (e.g. `tiny-llm`
 and `paged-serving`).
 
+## Core highlights at a glance
+
+| Dimension | What is here |
+| --- | --- |
+| **A single 5-step GEMM optimization ladder** | naive → tiled → bank-conflict-free → double buffering → WMMA Tensor Core; each step is an independent kernel file you can build and verify on its own |
+| **Correctness first** | every optimization step carries GoogleTest invariant checks plus a cuBLAS-referenced benchmark; 261/261 tests pass on the recorded test machine |
+| **From kernels to an operator library** | module 02 shows the header-only library shape (gemm / attention / softmax / warp reduction / memory pool) |
+| **Engineering finish** | root CMake preset graph + standalone Makefile, CI (CPU-safe checks), pre-commit, VitePress docs site |
+| **Where it leads** | this repo lays the foundation (GEMM / memory hierarchy / optimization methodology) → [cuflash](https://github.com/holtwood-systems/cuflash) goes deep on FlashAttention → [tiny-llm](https://github.com/holtwood-systems/tiny-llm) / [paged-serving](https://github.com/holtwood-systems/paged-serving) assemble the runtime and serving layers |
+
 ## Consolidation boundary
 
 cuda-foundations is the maintained successor for the overlapping learning paths that previously lived in `sgemm-optimization`, `modern-ai-kernels`, `hpc-ai-optimization-lab`, and `mini-inference-engine`. Useful implementations and verification now live in the matching modules; the duplicate repositories have been retired instead of remaining as parallel maintenance surfaces.
@@ -87,6 +97,33 @@ The former `llm-speed` GEMM learning path is covered here, while the maintained 
 | [02-tensorcraft-core](02-tensorcraft-core/README.md) | reusable kernel APIs, header-only layout, operator surface（历史模块名 TensorCraft，不是独立产品） | root/module CMake |
 | [03-hpc-advanced](03-hpc-advanced/README.md) | advanced optimization topics, experiments, CUDA 12+ features（内含教学用 FA 简化核） | root/module CMake |
 | [04-inference-engine](04-inference-engine/README.md)（教学预览） | tensor plumbing, memory pools, streams, lightweight inference flow | root/module CMake |
+
+### Module 01: the GEMM optimization ladder
+
+The five kernels in module 01 are the core narrative of this repo — one computation,
+rewritten five times, each step fixing one bottleneck of the previous one:
+
+```
+naive_sgemm               one output per thread, direct global reads
+    │  bottleneck: global memory re-read O(K) times
+    ▼  +shared memory tiling
+tiled_sgemm               BLOCK-sized tile staged in shared memory, global reads drop to O(K/BLOCK)
+    │  bottleneck: shared memory bank conflicts
+    ▼  +swizzle / padding
+bank_conflict_free_sgemm  reordered access pattern, conflicts removed
+    │  bottleneck: loads and compute run serially
+    ▼  +double buffering
+double_buffer_sgemm       prefetch of the next tile overlaps compute of the current one
+    │  bottleneck: FMA throughput ceiling
+    ▼  +WMMA fragments
+tensor_core_sgemm         16x16x16 WMMA fragments, FP32 accumulation
+    │  reference ceiling
+    ▼
+cuBLAS benchmark          benchmark.cuh measures the distance to cuBLAS at every step
+```
+
+For the interview-question mapping of each step, see the
+[Chinese README](README.zh-CN.md#面试考点映射).
 
 ## Start here
 

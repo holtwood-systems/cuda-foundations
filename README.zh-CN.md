@@ -50,6 +50,16 @@
 
 教学仓库，状态 **stable**（只做正确性修复与教学打磨，不再新增模块）。四个模块已完成。2026-08-23 在 RTX 3060 Laptop（sm_86、CUDA 12.0）上运行 `ctest --preset default`，结果为 **261/261 通过**。后续精力投入 [LEARNING_PATH.md](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md) 中记录的后续项目（如 `tiny-llm` 与 `paged-serving`）。
 
+## ⚡ 核心亮点（30 秒速览）
+
+| 维度 | 内容 |
+| --- | --- |
+| **一条主线的 5 级 GEMM 优化阶梯** | naive → tiled → bank-conflict-free → double buffering → WMMA Tensor Core，每级都是独立 kernel 文件，可单独构建、单独验证 |
+| **正确性先行** | 每级优化都配 GoogleTest 不变量校验 + cuBLAS 对照 benchmark；全仓 261/261 测试通过（RTX 3060 Laptop，sm_86，CUDA 12.0，2026-08-23） |
+| **从 kernel 到算子库** | 模块 02 给出 header-only 算子库形态（gemm / attention / softmax / warp reduction / memory pool） |
+| **工程化收尾** | 根 CMake preset 图 + 独立 Makefile 双构建体系、CI（CPU-safe 检查）、pre-commit、VitePress 文档站 |
+| **面试主线闭环** | 本仓打地基（GEMM/内存层级/优化方法论）→ [cuflash](https://github.com/holtwood-systems/cuflash) 深挖 FlashAttention → [tiny-llm](https://github.com/holtwood-systems/tiny-llm) / [paged-serving](https://github.com/holtwood-systems/paged-serving) 拼运行时与 Serving |
+
 ## 仓库收敛边界
 
 cuda-foundations 是 `sgemm-optimization`、`modern-ai-kernels`、`hpc-ai-optimization-lab` 和 `mini-inference-engine` 四条重叠学习路径的唯一维护入口。仍有价值的实现和验证已经进入对应模块，重复仓库直接退场，不再保留平行维护入口。
@@ -82,6 +92,32 @@ cuda-foundations 是 `sgemm-optimization`、`modern-ai-kernels`、`hpc-ai-optimi
 | [03-hpc-advanced](03-hpc-advanced/README.md) | 进阶优化主题、实验性 CUDA 12+ 能力（内含教学用 FA 简化核） | 根目录 / 模块 CMake |
 | [04-inference-engine](04-inference-engine/README.md)（教学预览） | tensor plumbing、memory pool、stream、轻量推理流程 | 根目录 / 模块 CMake |
 
+### 模块 01：GEMM 优化阶梯
+
+模块 01 的五个 kernel 是本仓的核心叙事——同一条计算，五次有目的的重写，每级解决上一级的一个瓶颈：
+
+```
+naive_sgemm            每线程一个输出，全局内存直读，带宽利用率极低
+    │  瓶颈：全局内存重复读 O(K) 次
+    ▼  +shared memory 分块
+tiled_sgemm            BLOCK 大小的 tile 载入 shared memory，全局读次数降为 O(K/BLOCK)
+    │  瓶颈：shared memory bank conflict 拖慢归约
+    ▼  +swizzle / padding
+bank_conflict_free_sgemm  重排访问模式，消除列冲突
+    │  瓶颈：加载与计算串行，访存延迟暴露
+    ▼  +双缓冲
+double_buffer_sgemm    下一块 tile 预取与当前块计算重叠，隐藏访存延迟
+    │  瓶颈：FMA 算力上限
+    ▼  +WMMA fragment
+tensor_core_sgemm      16x16x16 WMMA fragment，FP32 累加
+    │  对照基线
+    ▼
+cuBLAS benchmark       benchmark.cuh 与 cuBLAS 对照，量化每级的距离
+```
+
+每一级都对应面试中的一道标准追问（见下方[面试考点映射](#面试考点映射)），
+这也是本仓作为「地基仓」的定位：**先会手写每一级，再去读 cuDNN/CUTLASS**。
+
 ## 建议从哪里开始
 
 | 目标 | 入口 |
@@ -93,6 +129,24 @@ cuda-foundations 是 `sgemm-optimization`、`modern-ai-kernels`、`hpc-ai-optimi
 | 了解构建、验证、协作流程 | [docs/zh/index.md](docs/zh/index.md) |
 
 如果目标是从初学者逐步转向 AI Infra 岗位，请按 [AI Infra 初学者学习路径](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md) 串联 CUDA、Triton、FlashAttention、推理运行时和 Serving 五个主仓。该文档也统一保留性能优化与不变量测试的方法。
+
+## 面试考点映射
+
+| 高频面试题 | 本仓库对应物 |
+| --- | --- |
+| CUDA 内存层级（register / shared / global）各自带宽与延迟量级？ | 模块 01 tiled SGEMM：为什么分块能省带宽，一看便知 |
+| 什么是 shared memory bank conflict？怎么消除？ | [`bank_conflict_free_sgemm.cuh`](01-sgemm-tutorial/src/kernels/bank_conflict_free_sgemm.cuh)（swizzle / padding 前后对照） |
+| 怎么隐藏访存延迟？ | [`double_buffer_sgemm.cuh`](01-sgemm-tutorial/src/kernels/double_buffer_sgemm.cuh)（预取与计算重叠；`cp.async` 是 Ampere+ 的硬件版答案） |
+| Tensor Core / WMMA 编程模型？ | [`tensor_core_sgemm.cuh`](01-sgemm-tutorial/src/kernels/tensor_core_sgemm.cuh)（fragment / load / mma / store 四步） |
+| kernel 优化怎么验证没改错？性能怎么量化？ | 每级变体配 `verify.cuh` 不变量校验 + 与 cuBLAS 对照的 GFLOPS benchmark |
+| 优化到什么程度算够？怎么读 roofline？ | 模块 03 profiling 方法论；roofline 分母（算力/带宽）先测硬件基线再谈利用率 |
+| 算子库该长什么样？ | 模块 02 header-only 布局：[`include/tensorcraft/`](02-tensorcraft-core/include/tensorcraft/)（gemm / attention / softmax / warp_reduction / memory_pool） |
+| 手写 GEMM 离 cuBLAS 还有多远？为什么？ | cuBLAS 是 benchmark 里的性能天花板参照；差距来源（warp specialization、TMA、调参搜索）在 [cuflash](https://github.com/holtwood-systems/cuflash) 深入 |
+
+> 硬件基线参考：roofline 分析前先实测分母——在本组实验硬件（RTX 4090，BF16）上
+> matmul 实测 164 TFLOPS、D2D 带宽 936 GB/s；任何「利用率 xx%」的说法都必须以
+> 同机实测基线为分母，而不是纸面峰值。方法细节见
+> [LEARNING_PATH.md](https://github.com/holtwood-systems/portfolio/blob/master/LEARNING_PATH.md)。
 
 ## 快速开始
 
