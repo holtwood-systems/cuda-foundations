@@ -1,0 +1,190 @@
+{
+  "context": {
+    "date": "2026-11-06T02:26:58+00:00",
+    "host_name": "302153c75912",
+    "executable": "./benchmarks/conv_benchmark",
+    "num_cpus": 128,
+    "mhz_per_cpu": 4000,
+    "cpu_scaling_enabled": true,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 49152,
+        "num_sharing": 2
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 2097152,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 167772160,
+        "num_sharing": 64
+      }
+    ],
+    "load_avg": [8.83057,10.6069,9.32715],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "Conv2DBenchmark/Naive/64/56/64",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "Conv2DBenchmark/Naive/64/56/64",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 3367,
+      "real_time": 1.2469107801283294e-01,
+      "cpu_time": 1.2469321888921890e-01,
+      "time_unit": "ms",
+      "GFLOPS": 1.8542388275774213e+03
+    },
+    {
+      "name": "Conv2DBenchmark/Naive/128/28/128",
+      "family_index": 0,
+      "per_family_instance_index": 1,
+      "run_name": "Conv2DBenchmark/Naive/128/28/128",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 3744,
+      "real_time": 1.1226631756712738e-01,
+      "cpu_time": 1.1226817841880339e-01,
+      "time_unit": "ms",
+      "GFLOPS": 2.0594527430336866e+03
+    },
+    {
+      "name": "Conv2DBenchmark/Naive/256/14/256",
+      "family_index": 0,
+      "per_family_instance_index": 2,
+      "run_name": "Conv2DBenchmark/Naive/256/14/256",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 2529,
+      "real_time": 1.6602482565687127e-01,
+      "cpu_time": 1.6602745156188220e-01,
+      "time_unit": "ms",
+      "GFLOPS": 1.3926071009637972e+03
+    },
+    {
+      "name": "Conv2DBenchmark/Naive/512/7/512",
+      "family_index": 0,
+      "per_family_instance_index": 3,
+      "run_name": "Conv2DBenchmark/Naive/512/7/512",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1325,
+      "real_time": 3.1569574239119041e-01,
+      "cpu_time": 3.1568628754716960e-01,
+      "time_unit": "ms",
+      "GFLOPS": 7.3240751062224274e+02
+    },
+    {
+      "name": "Conv2DBenchmark/Naive/64/224/64",
+      "family_index": 0,
+      "per_family_instance_index": 4,
+      "run_name": "Conv2DBenchmark/Naive/64/224/64",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 382,
+      "real_time": 1.1128741682199907e+00,
+      "cpu_time": 1.1128916387434549e+00,
+      "time_unit": "ms",
+      "GFLOPS": 3.3241117097230563e+03
+    },
+    {
+      "name": "DepthwiseConv2DBenchmark/Depthwise/32/112",
+      "family_index": 1,
+      "per_family_instance_index": 0,
+      "run_name": "DepthwiseConv2DBenchmark/Depthwise/32/112",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 50435,
+      "real_time": 8.3082039516721640e+00,
+      "cpu_time": 8.3082171111331409e+00,
+      "time_unit": "us",
+      "GFLOPS": 8.6966239607748400e+02
+    },
+    {
+      "name": "DepthwiseConv2DBenchmark/Depthwise/64/56",
+      "family_index": 1,
+      "per_family_instance_index": 1,
+      "run_name": "DepthwiseConv2DBenchmark/Depthwise/64/56",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 57160,
+      "real_time": 7.3540895822750594e+00,
+      "cpu_time": 7.3542147655703340e+00,
+      "time_unit": "us",
+      "GFLOPS": 4.9123830553782170e+02
+    },
+    {
+      "name": "DepthwiseConv2DBenchmark/Depthwise/128/28",
+      "family_index": 1,
+      "per_family_instance_index": 2,
+      "run_name": "DepthwiseConv2DBenchmark/Depthwise/128/28",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 66979,
+      "real_time": 6.2400239348566400e+00,
+      "cpu_time": 6.2400485077412338e+00,
+      "time_unit": "us",
+      "GFLOPS": 2.8947467279446766e+02
+    },
+    {
+      "name": "DepthwiseConv2DBenchmark/Depthwise/256/14",
+      "family_index": 1,
+      "per_family_instance_index": 3,
+      "run_name": "DepthwiseConv2DBenchmark/Depthwise/256/14",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 72884,
+      "real_time": 5.7697448867008889e+00,
+      "cpu_time": 5.7684555183579347e+00,
+      "time_unit": "us",
+      "GFLOPS": 1.5657015939980730e+02
+    },
+    {
+      "name": "DepthwiseConv2DBenchmark/Depthwise/512/7",
+      "family_index": 1,
+      "per_family_instance_index": 4,
+      "run_name": "DepthwiseConv2DBenchmark/Depthwise/512/7",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 72270,
+      "real_time": 5.8056814749408794e+00,
+      "cpu_time": 5.8057800332087961e+00,
+      "time_unit": "us",
+      "GFLOPS": 7.7781796316250379e+01
+    }
+  ]
+}
